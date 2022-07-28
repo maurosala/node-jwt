@@ -7,20 +7,28 @@ const issuer = 'Rmqi7mOBWHuWmIxKmynIVZU3mC5OTGQM'
 axios.defaults.withCredentials = true
 
 const main = async () => {
-  // const t = jwt.sign({ id: 'mauro' }, secret, {
-  //   issuer,
-  //   expiresIn: '1h'
-  // })
-  const t =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im1hdXJvIiwiaWF0IjoxNjU5MDEyMDc4LCJleHAiOjE2NTkwMTU2NzgsImlzcyI6IlJtcWk3bU9CV0h1V21JeEtteW5JVlpVM21DNU9UR1FNIn0.6EgpWIU2iKQgkNce1gpDvEXtkklvNIh-S0Gt9FnbTmI'
+  const t = jwt.sign(
+    {
+      payload: { id: 'mauro', email: 'mauro.sala@krateo.io', company: 'krateo' }
+    },
+    secret,
+    {
+      issuer,
+      expiresIn: 60 * 1,
+      subject: 'krateo',
+      audience: 'krateo'
+    }
+  )
 
+  // const t =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1hdXJvIn0.eyJwYXlsb2FkIjp7ImlkIjoibWF1cm8iLCJlbWFpbCI6Im1hdXJvLnNhbGFAa3JhdGVvLmlvIiwiY29tcGFueSI6ImtyYXRlbyJ9LCJpYXQiOjE2NTkwMTcxNDQsImV4cCI6MTY1OTAxNzIwNCwiYXVkIjoia3JhdGVvIiwiaXNzIjoiUm1xaTdtT0JXSHVXbUl4S215bklWWlUzbUM1T1RHUU0iLCJzdWIiOiJtYXVybyJ9.LvYVF6wjLhPVDEkpb0YccoP6tHQ87L6NvfV05T-dAk0'
   console.log(t)
 
   const api = 'https://hello.krateo.site/'
   axios
     .get(api, {
       headers: {
-        Cookie: `krateo=${t}`
+        // Cookie: `krateo=${t}`
         // Authorization: `Bearer ${t}`
       }
     })
@@ -28,7 +36,7 @@ const main = async () => {
       console.log(res.data)
     })
     .catch((err) => {
-      console.log(err.response.data)
+      console.log(err.response.data, err.response.status)
     })
 }
 

@@ -20,15 +20,19 @@ server.get('/', (req, res) => {
   }
 
   if (b) {
-    jwt.verify(b, secret, { issuer }, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ error: 'Invalid token' })
-      }
+    try {
+      jwt.verify(b, secret, { issuer }, (err, decoded) => {
+        if (err) {
+          return res.status(401).json({ error: 'Invalid token' })
+        }
 
-      return res.status(200).json(decoded)
-    })
+        return res.status(200).json(decoded)
+      })
+    } catch {
+      res.status(406).json({ error: 'No token' })
+    }
   } else {
-    res.status(406).json({ error: 'No token' })
+    res.status(200).json(req.headers)
   }
 })
 
