@@ -20,4 +20,4 @@ COPY . .
 
 RUN sed -i "s/VERSION/$VERSION/g" ./package.json
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "index.js" ]
