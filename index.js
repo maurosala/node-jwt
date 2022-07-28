@@ -1,6 +1,6 @@
 const express = require('express')
 const server = express()
-const port = 3000
+const port = 8080
 
 server.get('/', (req, res) => {
   console.log(req.headers)
