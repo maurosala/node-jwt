@@ -6,4 +6,4 @@ script:
   - echo 'Installing dependencies...'
   - npm install
   - echo 'Running tests...'
-  - mocha
+  - node index.js && mocha
