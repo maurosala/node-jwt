@@ -3,12 +3,17 @@ orbs:
   node: circleci/node@5.0.2
 
 jobs:
-  build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+  build_and_test:
+    executor: node/default
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: mocha
-          name: Run tests
+          command: yarn test
+          name: mocha
+
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
