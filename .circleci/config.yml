@@ -10,6 +10,9 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
+          command: npm i -g mocha
+          name: install-mocha
+      - run:
           command: mocha
           name: mocha
 
