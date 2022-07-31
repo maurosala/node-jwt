@@ -20,6 +20,7 @@ server.get('/', (req, res) => {
   }
 
   if (b) {
+    console.log(b)
     try {
       jwt.verify(b, secret, { issuer }, (err, decoded) => {
         if (err) {
