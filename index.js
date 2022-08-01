@@ -24,16 +24,16 @@ server.get('/', (req, res) => {
     try {
       jwt.verify(b, secret, { issuer }, (err, decoded) => {
         if (err) {
-          return res.status(401).json({ error: 'Invalid token' })
+          return res.status(401).json({ error: 'Invalid token - NODE' })
         }
 
-        return res.status(200).json(decoded)
+        return res.status(200).json({ message: 'Good token - NODE', decoded })
       })
     } catch {
-      res.status(406).json({ error: 'No token' })
+      res.status(406).json({ error: 'Catch reading token - NODE' })
     }
   } else {
-    res.status(200).json(req.headers)
+    res.status(200).json({ error: 'No token - NODE' })
   }
 })
 
